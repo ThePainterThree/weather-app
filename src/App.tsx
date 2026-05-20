@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import Header from "./Header"
 import {getTemperatureNow } from "./api/weather-openmeteo.ts"
+import { cities } from "./data/cities.ts";
 
 function App() {
-  const location = "Cologne"
-  const latitude = 50.94
-  const longitude = 6.96
+  const cityName = "Cologne"
+  const location = cities.find((city) => city.name === cityName)
+  if (!location) {
+  return <h5>Sorry, city not found. Try again later.</h5>
+}
+  const latitude = location.latitude
+  const longitude = location.longitude
 
   const [temperature, setTemperature] = useState<number | null> (null);
 
@@ -19,7 +24,7 @@ function App() {
     <main>
       <h1>Weather Dashboard</h1>
       <p>Tracking weather metrics in real time.</p><br></br>
-      <Header location={location}></Header>
+      <Header location={location.name}></Header>
 
       <h3>
         {temperature === null ? "Loading data..." : `${temperature}°C`}
