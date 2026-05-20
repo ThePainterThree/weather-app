@@ -1,10 +1,10 @@
 
 type HeaderProps = {
-title: string 
+location: string 
 }
 
-function Header({ title }: HeaderProps) {
-    return <h4>{title}</h4>
+function Header({ location }: HeaderProps) {
+    return <h3>Current Temperature in {location}</h3>
 }
 
 export default Header
