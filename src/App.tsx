@@ -1,49 +1,44 @@
 import { useEffect, useState } from "react";
-import Header from "./Header"
-import {getTemperatureNow } from "./api/weather-openmeteo.ts"
+import Header from "./Header";
+import { getTemperatureNow } from "./api/weather-openmeteo.ts";
 import { cities } from "./data/cities.ts";
+import Dropdown from "./Dropdown.tsx";
 
 function App() {
-  const [cityName, setCityName] = useState<string>("Cologne")
-  const location = cities.find((city) => city.name === cityName)
+  const [cityName, setCityName] = useState<string>("Cologne");
+  const location = cities.find((city) => city.name === cityName);
   if (!location) {
-  return <h5>Sorry, city not found. Try again later.</h5>
-}
-  const latitude = location.latitude
-  const longitude = location.longitude
+    return <h5>Sorry, city not found. Try again later.</h5>;
+  }
+  const latitude = location.latitude;
+  const longitude = location.longitude;
 
-  const [temperature, setTemperature] = useState<number | null> (null);
+  const [temperature, setTemperature] = useState<number | null>(null);
 
   useEffect(() => {
     getTemperatureNow(latitude, longitude).then((temperatura: number) => {
-      setTemperature(temperatura)
+      setTemperature(temperatura);
     });
   }, [latitude, longitude]);
 
-  return(
-    <main>
+  return (
+    <main
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <h1>Weather Dashboard</h1>
-      <p>Tracking weather metrics in real time.</p><br></br>
-      <select
-        value={cityName}
-        onChange={(e) => setCityName(e.target.value)}
-      >
-       {cities.map((city) => (
-        <option key={city.name} value={city.name}>
-       {city.name}
-        </option>
-       ))}
-      </select>
-<br></br>
-<br></br>
+      <p>Tracking weather metrics in real time.</p>
+      <br></br>
+      <Dropdown cityName={cityName} onCityChange={setCityName} />
+      <br></br>
       <Header location={location.name}></Header>
-
-      <h3>
-        {temperature === null ? "Loading data..." : `${temperature}°C`}
-      </h3>
-  
+      <br></br>
+      <h3>{temperature === null ? "Loading data..." : `${temperature}°C`}</h3>
     </main>
-  )
+  );
 }
 
 export default App
