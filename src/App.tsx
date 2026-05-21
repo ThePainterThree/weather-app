@@ -24,8 +24,18 @@ function App() {
     <main>
       <h1>Weather Dashboard</h1>
       <p>Tracking weather metrics in real time.</p><br></br>
-
-      
+      <select
+        value={cityName}
+        onChange={(e) => setCityName(e.target.value)}
+      >
+       {cities.map((city) => (
+        <option key={city.name} value={city.name}>
+       {city.name}
+        </option>
+       ))}
+      </select>
+<br></br>
+<br></br>
       <Header location={location.name}></Header>
 
       <h3>
