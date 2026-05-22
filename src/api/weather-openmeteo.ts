@@ -1,4 +1,4 @@
-type WeatherNow = {
+export type WeatherNow = {
   temperature: number;
   windSpeed: number;
   humidity: number;
