@@ -60,7 +60,7 @@ function App() {
           <h2>{weather.temperature}°C</h2>
           <h3>Wind speed: {weather.windSpeed} km/h</h3>
           <h3>Humidity: {weather.humidity}%</h3>
-          <h3>Chance of rain: {weather.precipitationProbability}</h3>
+          <h3>Chance of rain: {weather.precipitationProbability}%</h3>
         </>
       )}
     </main>
