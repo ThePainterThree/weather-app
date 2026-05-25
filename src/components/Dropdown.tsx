@@ -1,5 +1,5 @@
 import { Portal, Select, createListCollection } from "@chakra-ui/react"
-import { cities } from "./data/cities";
+import { cities } from "../data/cities";
 
 type DropdownProps = {
     cityName: string,
