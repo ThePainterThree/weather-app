@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Header from "./Header";
+import Header from "./components/Header.tsx";
 import { getWeatherNow, type WeatherNow } from "./api/weather-openmeteo.ts";
 import { cities } from "./data/cities.ts";
-import Dropdown from "./Dropdown.tsx";
-
+import Dropdown from "./components/Dropdown.tsx";
+import WeatherCard from "./components/WeatherCard.tsx";
 
 function App() {
   const [cityName, setCityName] = useState<string>("Cologne");
@@ -46,23 +46,19 @@ function App() {
       <br></br>
       <Dropdown cityName={cityName} onCityChange={setCityName} />
      
-      <Header location={location.name}></Header>
+      <Header location={cityName}></Header>
       <br></br>
 
       {/* case1: if there is an error, display err message */}
       {errorMessage && <h4>{errorMessage}</h4>}
 
       {/* case2:if there is no error but the data has not been received */}
-      {!errorMessage && weather === null && <h4>"Loading data..."</h4>}
+      {!errorMessage && weather === null && <h4>Loading data...</h4>}
 
       {!errorMessage && weather && (
-        <>
-          <h2>{weather.temperature}°C</h2>
-          <h3>Wind speed: {weather.windSpeed} km/h</h3>
-          <h3>Humidity: {weather.humidity}%</h3>
-          <h3>Chance of rain: {weather.precipitationProbability}%</h3>
-        </>
+        <WeatherCard cityName={cityName} weather={weather}></WeatherCard>
       )}
+
     </main>
   );
 }
