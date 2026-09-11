@@ -274,6 +274,11 @@ code {
   background: linear-gradient(160deg, #0d151f, #1a2a39, #263b4d);
 }
 
+.weather-rain-day {
+  background: linear-gradient(180deg, #60778a 0%, #8295a3 50%, #aab5bd 100%);
+}
+
+
 .rain {
   position: absolute;
   inset: 0;
@@ -551,8 +556,4 @@ code {
   border-radius: 50%;
 
   background: #37485c;
-}
-
-.weather-rain-day {
-  background: linear-gradient(180deg, #60778a 0%, #8295a3 50%, #aab5bd 100%);
 }
