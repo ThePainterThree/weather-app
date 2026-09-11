@@ -3,6 +3,7 @@ import { getWeatherNow, type WeatherNow } from "./api/weather-openmeteo.ts";
 import { cities } from "./data/cities.ts";
 import Dropdown from "./components/Dropdown.tsx";
 import WeatherCard from "./components/WeatherCard.tsx";
+import WeatherBackground from "./components/WeatherBackground.tsx";
 
 function App() {
   const [cityName, setCityName] = useState<string>("Cologne");
@@ -52,6 +53,13 @@ function App() {
         minHeight: "100vh",
       }}
     >
+      {weather && (
+        <WeatherBackground
+          weatherCode={weather.weatherCode}
+          isDay={weather.isDay}
+        />
+      )}
+
       <h1>Weather Dashboard</h1>
 
       <p>Tracking weather metrics in real time.</p>

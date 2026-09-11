@@ -10,6 +10,7 @@ import {
 
 import {
   WiDaySunny,
+  WiNightClear,
   WiCloud,
   WiCloudy,
   WiFog,
@@ -26,11 +27,11 @@ type WeatherCardProps = {
   weather: WeatherNow;
 };
 
-function getWeatherDisplay(code: number) {
+function getWeatherDisplay(code: number, isDay: boolean) {
   if (code === 0) {
     return {
       label: "Clear sky",
-      icon: WiDaySunny,
+      icon: isDay ? WiDaySunny : WiNightClear,
     };
   }
 
@@ -90,7 +91,8 @@ function getWeatherDisplay(code: number) {
 }
 
 function WeatherCard({ cityName, weather }: WeatherCardProps) {
-  const weatherDisplay = getWeatherDisplay(weather.weatherCode);
+  const weatherDisplay = getWeatherDisplay(weather.weatherCode, weather.isDay);
+
   const WeatherIcon = weatherDisplay.icon;
 
   return (
@@ -98,10 +100,13 @@ function WeatherCard({ cityName, weather }: WeatherCardProps) {
       variant="outline"
       width="100%"
       maxWidth="500px"
-      bg="whiteAlpha.900"
-      borderRadius="2xl"
       marginTop="1.5rem"
+      borderRadius="2xl"
       overflow="hidden"
+      bg="rgba(255, 255, 255, 0.26)"
+      backdropFilter="blur(10px)"
+      borderColor="rgba(255, 255, 255, 0.25)"
+      boxShadow="0 12px 40px rgba(0, 0, 0, 0.15)"
     >
       <Card.Header>
         <Text fontSize="sm" fontWeight="bold" color="blue.900">
@@ -109,7 +114,7 @@ function WeatherCard({ cityName, weather }: WeatherCardProps) {
         </Text>
       </Card.Header>
 
-      <Separator />
+      <Separator borderColor="rgba(255,255,255,0.4)" />
 
       <Card.Body>
         <Flex
@@ -119,39 +124,39 @@ function WeatherCard({ cityName, weather }: WeatherCardProps) {
           gap="8"
         >
           <VStack gap="1">
-            <Box color="blue.600">
+            <Box color="blue.700">
               <WeatherIcon size={90} />
             </Box>
 
-            <Text color="blue.800" fontWeight="medium">
+            <Text color="blue.900" fontWeight="medium">
               {weatherDisplay.label}
             </Text>
 
             <HStack align="start" gap="1">
-              <Text fontSize="5xl" fontWeight="bold" color="blue.700">
+              <Text fontSize="5xl" fontWeight="bold" color="blue.900">
                 {weather.temperature}
               </Text>
 
-              <Text fontSize="xl" color="blue.700" paddingTop="2">
+              <Text fontSize="xl" color="blue.900" paddingTop="2">
                 °C
               </Text>
             </HStack>
           </VStack>
 
           <VStack align="stretch" gap="3" width={{ base: "100%", md: "auto" }}>
-            <Text fontSize="md" fontWeight="medium" color="blue.800">
+            <Text fontSize="md" fontWeight="medium" color="blue.900">
               Wind speed: {weather.windSpeed} km/h
             </Text>
 
             <Separator />
 
-            <Text fontSize="md" fontWeight="medium" color="blue.800">
+            <Text fontSize="md" fontWeight="medium" color="blue.900">
               Humidity: {weather.humidity}%
             </Text>
 
             <Separator />
 
-            <Text fontSize="md" fontWeight="medium" color="blue.800">
+            <Text fontSize="md" fontWeight="medium" color="blue.900">
               Chance of rain: {weather.precipitationProbability}%
             </Text>
           </VStack>

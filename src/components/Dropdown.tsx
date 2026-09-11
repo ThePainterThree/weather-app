@@ -16,9 +16,9 @@ const cityCollection = createListCollection({
 function Dropdown({ cityName, onCityChange }: DropdownProps) {
   return (
     <Select.Root
-      size="sm"
+      size="lg"
       width="100%"
-      maxWidth="300px"
+      maxWidth="340px"
       collection={cityCollection}
       value={[cityName]}
       onValueChange={(selected) => {
@@ -26,20 +26,36 @@ function Dropdown({ cityName, onCityChange }: DropdownProps) {
       }}
     >
       <Select.HiddenSelect />
-      <Select.Label>Select city</Select.Label>
+
+      <Select.Label fontSize="md" fontWeight="semibold">
+        Select city
+      </Select.Label>
+
       <Select.Control>
-        <Select.Trigger>
-          <Select.ValueText placeholder="Select city" />
+        <Select.Trigger minHeight="50px">
+          <Select.ValueText
+            placeholder="Select city"
+            fontSize="lg"
+            fontWeight="bold"
+          />
         </Select.Trigger>
+
         <Select.IndicatorGroup>
           <Select.Indicator />
         </Select.IndicatorGroup>
       </Select.Control>
+
       <Portal>
         <Select.Positioner>
           <Select.Content>
             {cityCollection.items.map((city) => (
-              <Select.Item item={city} key={city.value}>
+              <Select.Item
+                item={city}
+                key={city.value}
+                fontSize="lg"
+                fontWeight="semibold"
+                paddingY="3"
+              >
                 {city.label}
                 <Select.ItemIndicator />
               </Select.Item>
