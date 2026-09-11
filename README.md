@@ -1,15 +1,17 @@
 # Weather Dashboard
 
 A React and TypeScript weather dashboard that displays real-time weather data using the Open-Meteo API.
+**Live Demo:** https://weather-app-lake-five-90.vercel.app/
 
 ## Features
 
-- Select a city from a dropdown menu
-- Display current temperature
-- Display humidity
-- Display wind speed
-- Display precipitation information
-- Automatic weather updates when changing city
+- Real-time weather data from Open-Meteo
+- Multiple cities around the world
+- Local day/night detection
+- Dynamic animated weather backgrounds
+- Clear, rain, cloudy, fog, snow and thunderstorm states
+- Responsive interface
+- Temperature, humidity, wind speed and precipitation probability
 
 ## Tech Stack
 
@@ -18,6 +20,7 @@ A React and TypeScript weather dashboard that displays real-time weather data us
 - Vite
 - Chakra UI
 - Open-Meteo API
+- Vercel
 
 ## Run Locally
 
