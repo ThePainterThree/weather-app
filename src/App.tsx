@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "./components/Header.tsx";
 import { getWeatherNow, type WeatherNow } from "./api/weather-openmeteo.ts";
 import { cities } from "./data/cities.ts";
 import Dropdown from "./components/Dropdown.tsx";
@@ -11,27 +10,37 @@ function App() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const location = cities.find((city) => city.name === cityName);
-  if (!location) {
-    return <h5>Sorry, city not found.</h5>;
-  }
-
-  const latitude = location.latitude;
-  const longitude = location.longitude;
 
   useEffect(() => {
+    if (!location) {
+      setWeather(null);
+      setErrorMessage("Sorry, city not found.");
+      return;
+    }
+
+    let cancelled = false;
+
     setWeather(null);
     setErrorMessage(null);
 
-    getWeatherNow(latitude, longitude)
+    getWeatherNow(location.latitude, location.longitude)
       .then((weatherInfo) => {
-        setWeather(weatherInfo);
+        if (!cancelled) {
+          setWeather(weatherInfo);
+        }
       })
       .catch(() => {
-        setErrorMessage(
-          "Opalala! There was a problem loading the data. Please try again later.",
-        );
+        if (!cancelled) {
+          setErrorMessage(
+            "Opalala! There was a problem loading the data. Please try again later.",
+          );
+        }
       });
-  }, [latitude, longitude]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [location]);
 
   return (
     <main
@@ -39,26 +48,29 @@ function App() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        padding: "2rem 1rem",
+        minHeight: "100vh",
       }}
     >
       <h1>Weather Dashboard</h1>
+
       <p>Tracking weather metrics in real time.</p>
-      <br></br>
+
       <Dropdown cityName={cityName} onCityChange={setCityName} />
-     
-      <Header location={cityName}></Header>
-      <br></br>
 
-      {/* case1: if there is an error, display err message */}
-      {errorMessage && <h4>{errorMessage}</h4>}
-
-      {/* case2:if there is no error but the data has not been received */}
-      {!errorMessage && weather === null && <h4>Loading data...</h4>}
-
-      {!errorMessage && weather && (
-        <WeatherCard cityName={cityName} weather={weather}></WeatherCard>
+      {errorMessage && (
+        <p role="alert" style={{ marginTop: "2rem" }}>
+          {errorMessage}
+        </p>
       )}
 
+      {!errorMessage && weather === null && (
+        <p style={{ marginTop: "2rem" }}>Loading weather...</p>
+      )}
+
+      {!errorMessage && weather && (
+        <WeatherCard cityName={cityName} weather={weather} />
+      )}
     </main>
   );
 }

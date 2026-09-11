@@ -3,6 +3,7 @@ export type WeatherNow = {
   windSpeed: number;
   humidity: number;
   precipitationProbability: number;
+  weatherCode: number;
 };
 
 export async function getWeatherNow(
@@ -10,7 +11,7 @@ export async function getWeatherNow(
   longitude: number,
 ): Promise<WeatherNow> {
   const response = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=precipitation_probability&current=temperature_2m,relative_humidity_2m,wind_speed_10m`,
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=precipitation_probability&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code`,
   );
 
   if (!response.ok) {
@@ -18,21 +19,32 @@ export async function getWeatherNow(
   }
 
   const data = await response.json();
-  console.log(data)
 
   if (
     data.current?.temperature_2m === undefined ||
     data.current?.wind_speed_10m === undefined ||
     data.current?.relative_humidity_2m === undefined ||
-    data.hourly.precipitation_probability[0] === undefined
+    data.current?.weather_code === undefined
   ) {
-    throw new Error("Weather information is not available");
+    throw new Error("Weather information is not available.");
   }
+
+  const currentHour = data.current.time?.slice(0, 13);
+
+  const currentHourIndex = data.hourly.time.findIndex(
+    (time: string) => time.slice(0, 13) === currentHour,
+  );
+
+  const precipitationProbability =
+    currentHourIndex >= 0
+      ? data.hourly.precipitation_probability[currentHourIndex]
+      : 0;
 
   return {
     temperature: data.current.temperature_2m,
     windSpeed: data.current.wind_speed_10m,
     humidity: data.current.relative_humidity_2m,
-    precipitationProbability: data.hourly.precipitation_probability[0]
-  }
+    precipitationProbability,
+    weatherCode: data.current.weather_code,
+  };
 }
