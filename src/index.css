@@ -552,3 +552,7 @@ code {
 
   background: #37485c;
 }
+
+.weather-rain-day {
+  background: linear-gradient(180deg, #60778a 0%, #8295a3 50%, #aab5bd 100%);
+}
