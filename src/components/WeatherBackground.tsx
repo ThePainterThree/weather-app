@@ -8,7 +8,11 @@ function getWeatherType(code: number) {
     return "clear";
   }
 
-  if ([1, 2, 3].includes(code)) {
+  if ([1, 2].includes(code)) {
+    return "partly-cloudy";
+  }
+
+  if (code === 3) {
     return "cloudy";
   }
 
@@ -61,6 +65,40 @@ function WeatherBackground({ weatherCode, isDay }: WeatherBackgroundProps) {
         </>
       )}
 
+      {/* PARTLY CLOUDY DAY */}
+      {weatherType === "partly-cloudy" && isDay && (
+        <>
+          <div className="sun-glow" />
+
+          <div className="cloud cloud-one" />
+          <div className="cloud cloud-two" />
+        </>
+      )}
+
+      {/* PARTLY CLOUDY NIGHT */}
+      {weatherType === "partly-cloudy" && !isDay && (
+        <>
+          <div className="moon moon-muted" />
+
+          <div className="stars">
+            {Array.from({ length: 20 }).map((_, index) => (
+              <span
+                key={index}
+                style={{
+                  left: `${(index * 37) % 100}%`,
+                  top: `${(index * 23) % 75}%`,
+                  animationDelay: `${(index % 7) * -0.5}s`,
+                }}
+              />
+            ))}
+          </div>
+
+          <div className="cloud cloud-one" />
+          <div className="cloud cloud-two" />
+        </>
+      )}
+
+      {/* CLOUDY */}
       {weatherType === "cloudy" && (
         <>
           {!isDay && <div className="moon moon-muted" />}
@@ -71,6 +109,7 @@ function WeatherBackground({ weatherCode, isDay }: WeatherBackgroundProps) {
         </>
       )}
 
+      {/* RAIN */}
       {weatherType === "rain" && (
         <>
           {!isDay && <div className="moon moon-muted" />}
@@ -111,6 +150,7 @@ function WeatherBackground({ weatherCode, isDay }: WeatherBackgroundProps) {
         </div>
       )}
 
+      {/* FOG */}
       {weatherType === "fog" && (
         <>
           <div className="fog fog-one" />
@@ -119,6 +159,7 @@ function WeatherBackground({ weatherCode, isDay }: WeatherBackgroundProps) {
         </>
       )}
 
+      {/* THUNDERSTORM */}
       {weatherType === "storm" && (
         <>
           <div className="cloud cloud-one" />
