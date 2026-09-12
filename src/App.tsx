@@ -9,7 +9,6 @@ function App() {
   const [cityName, setCityName] = useState<string>("Cologne");
   const [weather, setWeather] = useState<WeatherNow | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
   const location = cities.find((city) => city.name === cityName);
 
   useEffect(() => {
@@ -44,15 +43,7 @@ function App() {
   }, [location]);
 
   return (
-    <main
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "2rem 1rem",
-        minHeight: "100vh",
-      }}
-    >
+    <>
       {weather && (
         <WeatherBackground
           weatherCode={weather.weatherCode}
@@ -60,26 +51,40 @@ function App() {
         />
       )}
 
-      <h1>Weather Dashboard</h1>
+      <main
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          padding: "2rem 1rem",
+          minHeight: "100vh",
 
-      <p>Tracking weather metrics in real time.</p>
+          // Keeps all app content above the animated background
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        <h1>Weather Dashboard</h1>
 
-      <Dropdown cityName={cityName} onCityChange={setCityName} />
+        <p>Tracking weather metrics in real time.</p>
 
-      {errorMessage && (
-        <p role="alert" style={{ marginTop: "2rem" }}>
-          {errorMessage}
-        </p>
-      )}
+        <Dropdown cityName={cityName} onCityChange={setCityName} />
 
-      {!errorMessage && weather === null && (
-        <p style={{ marginTop: "2rem" }}>Loading weather...</p>
-      )}
+        {errorMessage && (
+          <p role="alert" style={{ marginTop: "2rem" }}>
+            {errorMessage}
+          </p>
+        )}
 
-      {!errorMessage && weather && (
-        <WeatherCard cityName={cityName} weather={weather} />
-      )}
-    </main>
+        {!errorMessage && weather === null && (
+          <p style={{ marginTop: "2rem" }}>Loading weather...</p>
+        )}
+
+        {!errorMessage && weather && (
+          <WeatherCard cityName={cityName} weather={weather} />
+        )}
+      </main>
+    </>
   );
 }
 

@@ -103,18 +103,23 @@ function WeatherCard({ cityName, weather }: WeatherCardProps) {
       marginTop="1.5rem"
       borderRadius="2xl"
       overflow="hidden"
-      bg="rgba(255, 255, 255, 0.26)"
-      backdropFilter="blur(10px)"
-      borderColor="rgba(255, 255, 255, 0.25)"
-      boxShadow="0 12px 40px rgba(0, 0, 0, 0.15)"
+      bg="rgba(240, 244, 249, 0.72)"
+      backdropFilter="blur(14px)"
+      borderColor="rgba(255, 255, 255, 0.38)"
+      boxShadow="0 16px 45px rgba(0, 0, 0, 0.18)"
     >
       <Card.Header>
-        <Text fontSize="sm" fontWeight="bold" color="blue.900">
+        <Text
+          fontSize="sm"
+          fontWeight="bold"
+          color="#17213B"
+          letterSpacing="0.02em"
+        >
           CURRENT WEATHER IN {cityName.toUpperCase()}
         </Text>
       </Card.Header>
 
-      <Separator borderColor="rgba(255,255,255,0.4)" />
+      <Separator borderColor="rgba(23, 33, 59, 0.18)" />
 
       <Card.Body>
         <Flex
@@ -124,39 +129,39 @@ function WeatherCard({ cityName, weather }: WeatherCardProps) {
           gap="8"
         >
           <VStack gap="1">
-            <Box color="blue.700">
+            <Box color="#315BD6">
               <WeatherIcon size={90} />
             </Box>
 
-            <Text color="blue.900" fontWeight="medium">
+            <Text color="#17213B" fontWeight="medium">
               {weatherDisplay.label}
             </Text>
 
             <HStack align="start" gap="1">
-              <Text fontSize="5xl" fontWeight="bold" color="blue.900">
+              <Text fontSize="5xl" fontWeight="bold" color="#17213B">
                 {weather.temperature}
               </Text>
 
-              <Text fontSize="xl" color="blue.900" paddingTop="2">
+              <Text fontSize="xl" color="#17213B" paddingTop="2">
                 °C
               </Text>
             </HStack>
           </VStack>
 
           <VStack align="stretch" gap="3" width={{ base: "100%", md: "auto" }}>
-            <Text fontSize="md" fontWeight="medium" color="blue.900">
+            <Text fontSize="md" fontWeight="medium" color="#17213B">
               Wind speed: {weather.windSpeed} km/h
             </Text>
 
-            <Separator />
+            <Separator borderColor="rgba(23, 33, 59, 0.18)" />
 
-            <Text fontSize="md" fontWeight="medium" color="blue.900">
+            <Text fontSize="md" fontWeight="medium" color="#17213B">
               Humidity: {weather.humidity}%
             </Text>
 
-            <Separator />
+            <Separator borderColor="rgba(23, 33, 59, 0.18)" />
 
-            <Text fontSize="md" fontWeight="medium" color="blue.900">
+            <Text fontSize="md" fontWeight="medium" color="#17213B">
               Chance of rain: {weather.precipitationProbability}%
             </Text>
           </VStack>

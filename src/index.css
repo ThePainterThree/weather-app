@@ -94,28 +94,23 @@ body {
   z-index: 1;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
 h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
   margin: 32px 0;
+  color: #f7f9fc;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.28);
+}
+
+main > p {
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.22);
 }
 
 h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-}
-
-p {
-  margin: 0;
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
 }
 
 code,
@@ -203,6 +198,28 @@ code {
       transparent 35%
     ),
     linear-gradient(180deg, #202d42 0%, #37485c 50%, #66717c 100%);
+}
+
+/* =========================
+   PARTLY CLOUDY - DAY
+   ========================= */
+
+.weather-partly-cloudy-day {
+  background: linear-gradient(160deg, #5f9fd0 0%, #82b6da 52%, #bfdcec 100%);
+}
+
+/* =========================
+   PARTLY CLOUDY - NIGHT
+   ========================= */
+
+.weather-partly-cloudy-night {
+  background:
+    radial-gradient(
+      circle at 75% 20%,
+      rgba(170, 185, 210, 0.18),
+      transparent 35%
+    ),
+    linear-gradient(180deg, #1b2940 0%, #34475e 50%, #596b7d 100%);
 }
 
 /* =========================
@@ -609,7 +626,8 @@ code {
   }
 
   h2 {
-    font-size: 20px;
+    font-size: 28px;
+    font-weight: 500;
   }
 }
 
