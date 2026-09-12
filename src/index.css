@@ -4,9 +4,11 @@
   --bg: #fff;
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
+
   --accent: #aa3bff;
   --accent-bg: rgba(170, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
+
   --social-bg: rgba(244, 243, 236, 0.5);
 
   --shadow:
@@ -42,9 +44,11 @@
     --bg: #16171d;
     --border: #2e303a;
     --code-bg: #1f2028;
+
     --accent: #c084fc;
     --accent-bg: rgba(192, 132, 252, 0.15);
     --accent-border: rgba(192, 132, 252, 0.5);
+
     --social-bg: rgba(47, 48, 58, 0.5);
 
     --shadow:
@@ -117,24 +121,22 @@ p {
 code,
 .counter {
   font-family: var(--mono);
-
   display: inline-flex;
-
   border-radius: 4px;
-
   color: var(--text-h);
 }
 
 code {
   font-size: 15px;
   line-height: 135%;
-
   padding: 4px 8px;
-
   background: var(--code-bg);
 }
 
-/*weather background*/
+/* =========================
+   WEATHER BACKGROUND BASE
+   ========================= */
+
 .weather-background {
   position: fixed;
   inset: 0;
@@ -148,9 +150,12 @@ code {
   transition: background 1s ease;
 }
 
-/* clear sky*/
-.weather-clear {
-  background: linear-gradient(160deg, #16365f 0%, #24598a 50%, #6a9bbb 100%);
+/* =========================
+   CLEAR - DAY
+   ========================= */
+
+.weather-clear-day {
+  background: linear-gradient(160deg, #5f9fd0 0%, #86b9dc 50%, #c2dff0 100%);
 }
 
 .sun-glow {
@@ -186,10 +191,39 @@ code {
   }
 }
 
-/* clouds */
-.weather-cloudy {
-  background: linear-gradient(160deg, #182432, #26394c, #43576b);
+/* =========================
+   CLEAR - NIGHT
+   ========================= */
+
+.weather-clear-night {
+  background:
+    radial-gradient(
+      circle at 75% 20%,
+      rgba(170, 185, 210, 0.2),
+      transparent 35%
+    ),
+    linear-gradient(180deg, #202d42 0%, #37485c 50%, #66717c 100%);
 }
+
+/* =========================
+   CLOUDY - DAY
+   ========================= */
+
+.weather-cloudy-day {
+  background: linear-gradient(160deg, #708698 0%, #96a7b3 50%, #c1cbd1 100%);
+}
+
+/* =========================
+   CLOUDY - NIGHT
+   ========================= */
+
+.weather-cloudy-night {
+  background: linear-gradient(160deg, #111923 0%, #202d3a 50%, #394857 100%);
+}
+
+/* =========================
+   CLOUDS
+   ========================= */
 
 .cloud {
   position: absolute;
@@ -269,15 +303,25 @@ code {
   }
 }
 
-/*rain */
-.weather-rain {
-  background: linear-gradient(160deg, #0d151f, #1a2a39, #263b4d);
-}
+/* =========================
+   RAIN - DAY
+   ========================= */
 
 .weather-rain-day {
   background: linear-gradient(180deg, #60778a 0%, #8295a3 50%, #aab5bd 100%);
 }
 
+/* =========================
+   RAIN - NIGHT
+   ========================= */
+
+.weather-rain-night {
+  background: linear-gradient(180deg, #0b111a 0%, #172332 55%, #293848 100%);
+}
+
+/* =========================
+   RAIN
+   ========================= */
 
 .rain {
   position: absolute;
@@ -309,9 +353,25 @@ code {
   }
 }
 
-.weather-snow {
-  background: linear-gradient(160deg, #273745, #415465, #70808d);
+/* =========================
+   SNOW - DAY
+   ========================= */
+
+.weather-snow-day {
+  background: linear-gradient(180deg, #91a7b8 0%, #bdcbd4 50%, #e2e8ec 100%);
 }
+
+/* =========================
+   SNOW - NIGHT
+   ========================= */
+
+.weather-snow-night {
+  background: linear-gradient(180deg, #162332 0%, #304356 50%, #586d80 100%);
+}
+
+/* =========================
+   SNOW
+   ========================= */
 
 .snow {
   position: absolute;
@@ -340,9 +400,25 @@ code {
   }
 }
 
-.weather-fog {
-  background: linear-gradient(160deg, #343b42, #59636b, #737d84);
+/* =========================
+   FOG - DAY
+   ========================= */
+
+.weather-fog-day {
+  background: linear-gradient(180deg, #929da4 0%, #b1b9bd 50%, #d0d4d6 100%);
 }
+
+/* =========================
+   FOG - NIGHT
+   ========================= */
+
+.weather-fog-night {
+  background: linear-gradient(180deg, #252d34 0%, #3d4850 50%, #59646b 100%);
+}
+
+/* =========================
+   FOG
+   ========================= */
 
 .fog {
   position: absolute;
@@ -385,10 +461,24 @@ code {
   }
 }
 
-/* thunders */
-.weather-storm {
-  background: linear-gradient(160deg, #080c13, #121a26, #202b38);
+/* =========================
+   STORM - DAY
+   ========================= */
+
+.weather-storm-day {
+  background: linear-gradient(180deg, #465a6b 0%, #667a89 50%, #929fa8 100%);
 }
+
+/* =========================
+   STORM - NIGHT
+   ========================= */
+
+.weather-storm-night {
+  background: linear-gradient(180deg, #080d14 0%, #121d29 50%, #263442 100%);
+}
+
+/* 
+   LIGHTNING */
 
 .lightning {
   position: absolute;
@@ -420,74 +510,21 @@ code {
   }
 }
 
-/* responsiveness */
-
-@media (max-width: 1024px) {
-  h1 {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 600px) {
-  #root {
-    padding-inline: 12px;
-  }
-
-  h1 {
-    font-size: 32px;
-    letter-spacing: -1px;
-  }
-
-  .cloud {
-    transform: scale(0.75);
-  }
-
-  .sun-glow {
-    width: 360px;
-    height: 360px;
-
-    top: -160px;
-    right: -140px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .weather-background *,
-  .weather-background *::before,
-  .weather-background *::after {
-    animation: none !important;
-  }
-}
-
-/* CLEAR NIGHT */
-
-.weather-clear-night {
-  background:
-    radial-gradient(
-      circle at 75% 20%,
-      rgba(170, 185, 210, 0.2),
-      transparent 35%
-    ),
-    linear-gradient(180deg, #202d42 0%, #37485c 50%, #66717c 100%);
-}
-
 /* STARS */
 
 .stars {
   position: absolute;
   inset: 0;
+
   overflow: hidden;
 }
 
 .stars span {
   position: absolute;
+
   width: 3px;
   height: 3px;
+
   border-radius: 50%;
 
   background: rgba(255, 255, 255, 0.95);
@@ -502,6 +539,7 @@ code {
 .stars span:nth-child(3n) {
   width: 2px;
   height: 2px;
+
   opacity: 0.6;
 }
 
@@ -522,7 +560,7 @@ code {
   }
 }
 
-/* MOON */
+/* MOON*/
 
 .moon {
   position: absolute;
@@ -556,4 +594,70 @@ code {
   border-radius: 50%;
 
   background: #37485c;
+}
+
+.moon-muted {
+  opacity: 0.45;
+}
+
+/*RESPONSIVENESS*/
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  #root {
+    padding-inline: 12px;
+  }
+
+  h1 {
+    font-size: 32px;
+    letter-spacing: -1px;
+  }
+
+  .cloud {
+    transform: scale(0.75);
+  }
+
+  .sun-glow {
+    width: 360px;
+    height: 360px;
+
+    top: -160px;
+    right: -140px;
+  }
+
+  .moon {
+    width: 80px;
+    height: 80px;
+
+    top: 6%;
+    right: 8%;
+  }
+
+  .moon::after {
+    width: 75px;
+    height: 75px;
+
+    top: -6px;
+    left: 21px;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-background *,
+  .weather-background *::before,
+  .weather-background *::after {
+    animation: none !important;
+  }
 }
